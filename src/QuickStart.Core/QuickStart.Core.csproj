@@ -1,26 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
+  
+ <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <PreserveCompilationContext>true</PreserveCompilationContext>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <OutputType>Exe</OutputType>
+    <RuntimeIdentifiers>win-x64;osx-x64;linux-x64;</RuntimeIdentifiers>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="Microsoft.CodeAnalysis" Version="2.3.2" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
+   
     <PackageReference Include="Microsoft.DotNet.InternalAbstractions" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.0.0" />
+    <PackageReference Include="EdgeJs" Version="9.3.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ExternalLibrary\ExternalLibrary.csproj" />
   </ItemGroup>
+  
   <ItemGroup>
-    <Reference Include="EdgeJs">
-      <HintPath>..\..\node_modules\electron-edge-js\lib\bootstrap\bin\Release\netcoreapp2.0\EdgeJs.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
+    <TrimFilesRootFiles Include="EdgeJs.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Packaging.Tools.Trimming" Version="1.1.0-preview1-25818-01" />
   </ItemGroup>
 </Project>

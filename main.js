@@ -1,6 +1,7 @@
 
 const path = require('path');
-const baseNetAppPath = path.join(__dirname, '\\src\\QuickStart.Core\\bin\\Debug\\netcoreapp2.0');
+const baseNetAppPath = path.join(__dirname, '\\src\\QuickStart.Core\\bin\\Release\\netcoreapp2.0\\win-x64\\publish'); //D:\r\Repo\edge-js-quick-start\src\QuickStart.Core\bin\Release\netcoreapp2.0\win-x64
+
 
 process.env.EDGE_USE_CORECLR = 1;
 process.env.EDGE_APP_ROOT = baseNetAppPath;
