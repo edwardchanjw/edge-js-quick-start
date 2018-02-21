@@ -2,9 +2,9 @@
 
 ## Repro steps for https://github.com/agracio/edge-js/issues/24
 
-This issue is electron specific, I have done few modifications to run this app on electron.
+This issue is electron specific, I have done few modifications to run this app on electron. I know there is separate edge-js project for electron, but I think it only changes the way it is built(against node vs electron) So if we build correctly this project should also run on electron. As we dont have dotnet core on client machines where electron app is installed, we package the standalone app with electron
 
-1. creating standalone core app. 
+1. Creating the standalone core app. 
 ```
 cd src\QuickStart.Core
 publish.bat
@@ -17,28 +17,26 @@ npm install
 
 fixing to build with electron
 
-in node-modules\edge-js\package.json
-remove the install script
-'''
+In `node-modules\edge-js\package.json` remove the install script
+```
 "scripts": {
     "test": "node tools/test.js"
   },
-'''
-build the dependencies with electron builder
+```
+Build the dependencies with electron builder
+
 ```
 node_modules\.bin\electron-builder install-app-deps
 ```
 
 
 3. Run the app
-npm run start
+`npm run start`
 
 you will get the expected output as you have dotnet on your path
 ```
 .NET Core welcomes Node.Js
 ```
-
-
 
 4. Now set the path just to include nodejs, removing dotnet from the path.
 
@@ -62,9 +60,9 @@ Error: This is not a published, standalone application and we are unable to loca
 Terminate batch job (Y/N)? Y
 ```
 
-5. if I comment out the exeption throwing section and build the edge-js, app works as expected
+5. If we comment out the exeption throwing section and build the edge-js, app works as expected
 ```
-host_mode_t mode = coreclr_exists_in_dir(edgeAppDir) ? host_mode_t::standalone : host_mode_t::muxer;
+    host_mode_t mode = coreclr_exists_in_dir(edgeAppDir) ? host_mode_t::standalone : host_mode_t::muxer;
 
 	// if (mode == host_mode_t::standalone && dotnetExecutablePath.empty())
 	// {
@@ -77,4 +75,4 @@ host_mode_t mode = coreclr_exists_in_dir(edgeAppDir) ? host_mode_t::standalone :
 
 This is also reproducible on mac-os following similar steps.
 
-**electron version is  1.8.2
+**electron version is  1.8.2**
